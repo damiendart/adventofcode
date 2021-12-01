@@ -8,8 +8,19 @@ import (
 	"strconv"
 )
 
-func main() {
+func CountMeasurementIncreases(measurements []int) int {
 	var count int
+
+	for i := 1; i < len(measurements); i++ {
+		if measurements[i] > measurements[i-1] {
+			count++
+		}
+	}
+
+	return count
+}
+
+func main() {
 	var measurements []int
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -24,15 +35,9 @@ func main() {
 		measurements = append(measurements, measurement)
 	}
 
-	for i := 1; i < len(measurements); i++ {
-		if measurements[i] > measurements[i-1] {
-			count++
-		}
-	}
-
-	fmt.Println(count)
-
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println(CountMeasurementIncreases(measurements))
 }

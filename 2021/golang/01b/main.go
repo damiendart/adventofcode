@@ -8,10 +8,33 @@ import (
 	"strconv"
 )
 
-func main() {
+func CountMeasurementWindowIncreases(measurementWindows []int) int {
 	var count int
-	var measurements []int
+
+	for i := 1; i < len(measurementWindows); i++ {
+		if measurementWindows[i] > measurementWindows[i-1] {
+			count++
+		}
+	}
+
+	return count
+}
+
+func GetMeasurementWindows(measurements []int) []int {
 	var measurementWindows []int
+
+	for i := 2; i < len(measurements); i++ {
+		measurementWindows = append(
+			measurementWindows,
+			measurements[i-2]+measurements[i-1]+measurements[i],
+		)
+	}
+
+	return measurementWindows
+}
+
+func main() {
+	var measurements []int
 
 	scanner := bufio.NewScanner(os.Stdin)
 
@@ -25,22 +48,13 @@ func main() {
 		measurements = append(measurements, measurement)
 	}
 
-	for i := 2; i < len(measurements); i++ {
-		measurementWindows = append(
-			measurementWindows,
-			measurements[i-2]+measurements[i-1]+measurements[i],
-		)
-	}
-
-	for i := 1; i < len(measurementWindows); i++ {
-		if measurementWindows[i] > measurementWindows[i-1] {
-			count++
-		}
-	}
-
-	fmt.Println(count)
-
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println(
+		CountMeasurementWindowIncreases(
+			GetMeasurementWindows(measurements),
+		),
+	)
 }
