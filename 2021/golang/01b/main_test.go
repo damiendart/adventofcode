@@ -22,6 +22,6 @@ func TestGetMeasurementWindows(t *testing.T) {
 	input := []int{199, 200, 208, 210, 200, 207, 240, 269, 260, 263}
 
 	if output := GetMeasurementWindows(input); reflect.DeepEqual(output, expected) == false {
-		t.Error("Expected {}, got {}", expected, output)
+		t.Errorf("Expected %#v, got %#v", expected, output)
 	}
 }

@@ -21,6 +21,6 @@ func TestParseInstructions(t *testing.T) {
 	}
 
 	if output := ParseInstructions(input); reflect.DeepEqual(output, expected) == false {
-		t.Error("Expected {}, got {}", expected, output)
+		t.Errorf("Expected %#v, got %#v", expected, output)
 	}
 }
