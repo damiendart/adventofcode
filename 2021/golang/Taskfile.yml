@@ -1,0 +1,22 @@
+# This file was written by Damien Dart, <damiendart@pobox.com>. This is
+# free and unencumbered software released into the public domain. For
+# more information, please refer to the accompanying "UNLICENCE" file.
+
+---
+version: '3'
+
+output: 'prefixed'
+
+vars:
+  GO_PACKAGES:
+    sh: 'go list ./...'
+
+tasks:
+  default:
+    deps:
+      - task: 'test'
+
+  test:
+    cmds:
+      - 'go test {{catLines .GO_PACKAGES}}'
+    desc: 'Run tests for all solutions'
