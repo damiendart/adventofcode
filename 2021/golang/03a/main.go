@@ -12,12 +12,12 @@ import (
 	"strconv"
 )
 
-type BitCount struct {
+type bitCount struct {
 	one  int
 	zero int
 }
 
-func CalculateMostCommonBitCount(bitCount BitCount) int {
+func calculateMostCommonBitCount(bitCount bitCount) int {
 	if bitCount.one >= bitCount.zero {
 		return 1
 	}
@@ -25,7 +25,7 @@ func CalculateMostCommonBitCount(bitCount BitCount) int {
 	return 0
 }
 
-func CalculateLeastCommonBitCount(bitCount BitCount) int {
+func calculateLeastCommonBitCount(bitCount bitCount) int {
 	if bitCount.one >= bitCount.zero {
 		return 0
 	}
@@ -33,8 +33,8 @@ func CalculateLeastCommonBitCount(bitCount BitCount) int {
 	return 1
 }
 
-func CalculateRate(report []int64, numberOfBits int, commonBitFunction func(BitCount) int) int {
-	var bitCounts = make([]BitCount, numberOfBits)
+func calculateRate(report []int64, numberOfBits int, commonBitFunction func(bitCount) int) int {
+	var bitCounts = make([]bitCount, numberOfBits)
 	var rate int
 
 	for _, line := range report {
@@ -77,8 +77,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	epsilonRate := CalculateRate(report, reportLineLength, CalculateLeastCommonBitCount)
-	gammaRate := CalculateRate(report, reportLineLength, CalculateMostCommonBitCount)
+	epsilonRate := calculateRate(report, reportLineLength, calculateLeastCommonBitCount)
+	gammaRate := calculateRate(report, reportLineLength, calculateMostCommonBitCount)
 
 	fmt.Println(epsilonRate * gammaRate)
 }

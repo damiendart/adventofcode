@@ -12,12 +12,12 @@ import (
 	"strconv"
 )
 
-type BitCount struct {
+type bitCount struct {
 	one  int
 	zero int
 }
 
-func CalculateMostCommonBitCount(bitCount BitCount) int64 {
+func calculateMostCommonBitCount(bitCount bitCount) int64 {
 	if bitCount.one >= bitCount.zero {
 		return 1
 	}
@@ -25,7 +25,7 @@ func CalculateMostCommonBitCount(bitCount BitCount) int64 {
 	return 0
 }
 
-func CalculateLeastCommonBitCount(bitCount BitCount) int64 {
+func calculateLeastCommonBitCount(bitCount bitCount) int64 {
 	if bitCount.one >= bitCount.zero {
 		return 0
 	}
@@ -33,7 +33,7 @@ func CalculateLeastCommonBitCount(bitCount BitCount) int64 {
 	return 1
 }
 
-func CalculateRate(report []int64, numberOfBits int, commonBitFunction func(BitCount) int64) int {
+func calculateRate(report []int64, numberOfBits int, commonBitFunction func(bitCount) int64) int {
 	filteredReport := make([]int64, len(report))
 
 	copy(filteredReport, report)
@@ -42,7 +42,7 @@ func CalculateRate(report []int64, numberOfBits int, commonBitFunction func(BitC
 		if len(filteredReport) == 1 {
 			break
 		}
-		bitCounts := make([]BitCount, numberOfBits)
+		bitCounts := make([]bitCount, numberOfBits)
 
 		for _, line := range filteredReport {
 			for i := len(bitCounts) - 1; i >= 0; i-- {
@@ -92,8 +92,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	generatorRating := CalculateRate(report, reportLineLength, CalculateMostCommonBitCount)
-	scrubberRating := CalculateRate(report, reportLineLength, CalculateLeastCommonBitCount)
+	generatorRating := calculateRate(report, reportLineLength, calculateMostCommonBitCount)
+	scrubberRating := calculateRate(report, reportLineLength, calculateLeastCommonBitCount)
 
 	fmt.Println(generatorRating * scrubberRating)
 }

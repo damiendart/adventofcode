@@ -12,7 +12,7 @@ import (
 	"strconv"
 )
 
-func CountMeasurementWindowIncreases(measurementWindows []int) int {
+func countMeasurementWindowIncreases(measurementWindows []int) int {
 	var count int
 
 	for i := 1; i < len(measurementWindows); i++ {
@@ -24,7 +24,7 @@ func CountMeasurementWindowIncreases(measurementWindows []int) int {
 	return count
 }
 
-func GetMeasurementWindows(measurements []int) []int {
+func getMeasurementWindows(measurements []int) []int {
 	var measurementWindows []int
 
 	for i := 2; i < len(measurements); i++ {
@@ -57,8 +57,8 @@ func main() {
 	}
 
 	fmt.Println(
-		CountMeasurementWindowIncreases(
-			GetMeasurementWindows(measurements),
+		countMeasurementWindowIncreases(
+			getMeasurementWindows(measurements),
 		),
 	)
 }

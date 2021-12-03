@@ -12,7 +12,7 @@ import (
 	"strconv"
 )
 
-func CountMeasurementIncreases(measurements []int) int {
+func countMeasurementIncreases(measurements []int) int {
 	var count int
 
 	for i := 1; i < len(measurements); i++ {
@@ -43,5 +43,5 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(CountMeasurementIncreases(measurements))
+	fmt.Println(countMeasurementIncreases(measurements))
 }

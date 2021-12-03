@@ -10,29 +10,29 @@ import (
 )
 
 func TestCalculateMostCommonBitCount(t *testing.T) {
-	if output := CalculateMostCommonBitCount(BitCount{2, 0}); output != 1 {
+	if output := calculateMostCommonBitCount(bitCount{2, 0}); output != 1 {
 		t.Errorf("Expected 1, got %#v", output)
 	}
 
-	if output := CalculateMostCommonBitCount(BitCount{0, 2}); output != 0 {
+	if output := calculateMostCommonBitCount(bitCount{0, 2}); output != 0 {
 		t.Errorf("Expected 0, got %#v", output)
 	}
 
-	if output := CalculateMostCommonBitCount(BitCount{2, 2}); output != 1 {
+	if output := calculateMostCommonBitCount(bitCount{2, 2}); output != 1 {
 		t.Errorf("Expected 1, got %#v", output)
 	}
 }
 
 func TestCalculateLeastCommonBitCount(t *testing.T) {
-	if output := CalculateLeastCommonBitCount(BitCount{2, 0}); output != 0 {
+	if output := calculateLeastCommonBitCount(bitCount{2, 0}); output != 0 {
 		t.Errorf("Expected 0, got %#v", output)
 	}
 
-	if output := CalculateLeastCommonBitCount(BitCount{0, 2}); output != 1 {
+	if output := calculateLeastCommonBitCount(bitCount{0, 2}); output != 1 {
 		t.Errorf("Expected 1, got %#v", output)
 	}
 
-	if output := CalculateLeastCommonBitCount(BitCount{2, 2}); output != 0 {
+	if output := calculateLeastCommonBitCount(bitCount{2, 2}); output != 0 {
 		t.Errorf("Expected 0, got %#v", output)
 	}
 }
@@ -65,11 +65,11 @@ func TestCalculateRating(t *testing.T) {
 		inputConverted = append(inputConverted, value)
 	}
 
-	if output := CalculateRate(inputConverted, 5, CalculateLeastCommonBitCount); output != 10 {
+	if output := calculateRate(inputConverted, 5, calculateLeastCommonBitCount); output != 10 {
 		t.Errorf("Expected 10, got %#v", output)
 	}
 
-	if output := CalculateRate(inputConverted, 5, CalculateMostCommonBitCount); output != 23 {
+	if output := calculateRate(inputConverted, 5, calculateMostCommonBitCount); output != 23 {
 		t.Errorf("Expected 23, got %#v", output)
 	}
 }

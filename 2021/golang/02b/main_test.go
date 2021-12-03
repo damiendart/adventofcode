@@ -10,7 +10,7 @@ import (
 )
 
 func TestParseInstructions(t *testing.T) {
-	expected := Position{
+	expected := position{
 		aim:   10,
 		depth: 60,
 		x:     15,
@@ -24,7 +24,7 @@ func TestParseInstructions(t *testing.T) {
 		"forward 2",
 	}
 
-	if output := ParseInstructions(input); reflect.DeepEqual(output, expected) == false {
+	if output := parseInstructions(input); reflect.DeepEqual(output, expected) == false {
 		t.Errorf("Expected %#v, got %#v", expected, output)
 	}
 }

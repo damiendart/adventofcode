@@ -13,36 +13,36 @@ import (
 	"strconv"
 )
 
-type Command struct {
+type command struct {
 	regex   *regexp.Regexp
-	handler func(Position, int) Position
+	handler func(position, int) position
 }
 
-type Position struct {
+type position struct {
 	x     int
 	depth int
 }
 
-var Commands = []Command{
-	Command{
+var commands = []command{
+	command{
 		regexp.MustCompile("^down ([0-9]+)$"),
-		func(position Position, value int) Position {
+		func(position position, value int) position {
 			position.depth += value
 
 			return position
 		},
 	},
-	Command{
+	command{
 		regexp.MustCompile("^forward ([0-9]+)$"),
-		func(position Position, value int) Position {
+		func(position position, value int) position {
 			position.x += value
 
 			return position
 		},
 	},
-	Command{
+	command{
 		regexp.MustCompile("^up ([0-9]+)$"),
-		func(position Position, value int) Position {
+		func(position position, value int) position {
 			position.depth -= value
 
 			return position
@@ -50,11 +50,11 @@ var Commands = []Command{
 	},
 }
 
-func ParseInstructions(instructions []string) Position {
-	var position Position
+func parseInstructions(instructions []string) position {
+	var position position
 
 	for _, instruction := range instructions {
-		for _, command := range Commands {
+		for _, command := range commands {
 			matches := command.regex.FindStringSubmatch(instruction)
 
 			if len(matches) > 0 {
@@ -85,7 +85,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	position := ParseInstructions(instructions)
+	position := parseInstructions(instructions)
 
 	fmt.Println(position.depth * position.x)
 }

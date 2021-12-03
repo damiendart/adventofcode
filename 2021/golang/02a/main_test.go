@@ -10,7 +10,7 @@ import (
 )
 
 func TestParseInstructions(t *testing.T) {
-	expected := Position{15, 10}
+	expected := position{15, 10}
 	input := []string{
 		"forward 5",
 		"down 5",
@@ -20,7 +20,7 @@ func TestParseInstructions(t *testing.T) {
 		"forward 2",
 	}
 
-	if output := ParseInstructions(input); reflect.DeepEqual(output, expected) == false {
+	if output := parseInstructions(input); reflect.DeepEqual(output, expected) == false {
 		t.Errorf("Expected %#v, got %#v", expected, output)
 	}
 }
