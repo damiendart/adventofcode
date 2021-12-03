@@ -16,6 +16,28 @@ tasks:
     deps:
       - task: 'test'
 
+  lint:
+    cmds:
+      - task: 'lint:golint'
+      - task: 'lint:staticcheck'
+      - task: 'lint:vet'
+    desc: 'Run all linting-related tasks'
+
+  lint:golint:
+    cmds:
+      - 'golint {{catLines .GO_PACKAGES}}'
+    desc: 'Lint Go files with Golint'
+
+  lint:staticcheck:
+    cmds:
+      - 'staticcheck {{catLines .GO_PACKAGES}}'
+    desc: 'Lint Go files with Staticcheck'
+
+  lint:vet:
+    cmds:
+      - 'go vet {{catLines .GO_PACKAGES}}'
+    desc: 'Lint Go files with Vet'
+
   test:
     cmds:
       - 'go test {{catLines .GO_PACKAGES}}'
