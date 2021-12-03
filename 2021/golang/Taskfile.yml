@@ -25,7 +25,7 @@ tasks:
 
   lint:golint:
     cmds:
-      - 'golint {{catLines .GO_PACKAGES}}'
+      - 'golint -set_exit_status {{catLines .GO_PACKAGES}}'
     desc: 'Lint Go files with Golint'
 
   lint:staticcheck:
