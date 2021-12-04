@@ -14,7 +14,13 @@ vars:
 tasks:
   default:
     deps:
+      - task: 'ci'
+
+  ci:
+    cmds:
+      - task: 'lint'
       - task: 'test'
+    desc: 'Run all CI-related tasks'
 
   lint:
     cmds:
