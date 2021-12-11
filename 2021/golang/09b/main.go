@@ -24,8 +24,6 @@ func checkFlow(area [][]int, position cell) []cell {
 
 	validCells = append(validCells, position)
 
-	fmt.Println(position)
-
 	if position.x > 0 &&
 		area[position.y][position.x-1] > area[position.y][position.x] &&
 		area[position.y][position.x-1] != 9 {
@@ -94,8 +92,6 @@ func calculateBasins(input [][]int) []int {
 			}
 
 			basins = append(basins, len(uniqueBasinCells))
-
-			fmt.Println("---")
 		}
 	}
 
