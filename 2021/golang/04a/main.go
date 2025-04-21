@@ -6,7 +6,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"strconv"
@@ -118,7 +118,7 @@ func parseInput(input string) ([]board, []int) {
 }
 
 func main() {
-	input, err := ioutil.ReadAll(os.Stdin)
+	input, err := io.ReadAll(os.Stdin)
 
 	if err != nil {
 		log.Fatal(err)
