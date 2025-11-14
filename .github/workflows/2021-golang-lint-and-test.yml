@@ -21,11 +21,11 @@ jobs:
       - name: 'Set up Go environment'
         uses: 'actions/setup-go@v6'
         with:
-          go-version-file: './2021/golang/go.mod'
+          go-version-file: './2021-golang/go.mod'
 
       - name: 'Install Task'
         run: 'curl -sL https://taskfile.dev/install.sh | sh'
-        working-directory: './2021/golang'
+        working-directory: './2021-golang'
 
       - name: 'Install Golint and Staticcheck'
         run: |
@@ -34,4 +34,4 @@ jobs:
 
       - name: 'Run all linting and testing tasks'
         run: './bin/task ci'
-        working-directory: './2021/golang'
+        working-directory: './2021-golang'
