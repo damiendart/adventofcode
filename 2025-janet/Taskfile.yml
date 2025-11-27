@@ -1,0 +1,41 @@
+# This file was written by Damien Dart, <damiendart@pobox.com>. This is
+# free and unencumbered software released into the public domain. For
+# more information, please refer to the accompanying "UNLICENCE" file.
+
+---
+version: '3'
+
+output: 'prefixed'
+
+tasks:
+  default:
+    deps:
+      - task: 'start'
+
+  ci:
+    cmds:
+      - task: 'clean'
+      - task: 'dependencies'
+    desc: 'Run all CI-related tasks'
+
+  clean:
+    cmds:
+      - 'rm -fr .local .task'
+    desc: 'Delete all caches and third-party dependencies'
+
+  dependencies:
+    cmds:
+      - 'curl --location --output janet-src.tar.gz "https://github.com/janet-lang/janet/archive/refs/tags/v1.40.1.tar.gz"'
+      - 'echo "e7fdcb7ccc83a3be6181f7d7d71f0ea027a000e0eefe9bba3b8373c05eb5764a janet-src.tar.gz" | sha256sum --check --quiet -'
+      - 'tar -f janet-src.tar.gz -xz --one-top-level --strip-components=1'
+      - 'make -C janet-src -j'
+      - 'make -C janet-src install'
+      - defer: 'rm -rf janet-src janet-src.tar.gz'
+    desc: 'Compile and install Janet v1.40.1 at the project level'
+    env:
+      PREFIX: '{{ .ROOT_DIR }}/.local'
+
+  start:
+    cmds:
+      - task: 'ci'
+    desc: 'Run all development environment setup tasks'
