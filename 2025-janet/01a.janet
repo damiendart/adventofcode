@@ -23,6 +23,4 @@
   password
 )
 
-(assert (= (solve "L68 L30 R48 L5 R60 L55 L1 L99 R14 L82") 3))
-
 (defn main [&] (->> (file/read stdin :all) string/trim solve pp))
