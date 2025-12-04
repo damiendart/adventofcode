@@ -25,15 +25,26 @@ tasks:
 
   dependencies:
     cmds:
+      - task: 'dependencies:janet'
+      - task: 'dependencies:spork'
+
+  dependencies:janet:
+    cmds:
       - 'curl --location --output janet-src.tar.gz "https://github.com/janet-lang/janet/archive/refs/tags/v1.40.1.tar.gz"'
       - 'echo "e7fdcb7ccc83a3be6181f7d7d71f0ea027a000e0eefe9bba3b8373c05eb5764a janet-src.tar.gz" | sha256sum --check --quiet -'
       - 'tar -f janet-src.tar.gz -xz --one-top-level --strip-components=1'
       - 'make -C janet-src -j'
       - 'make -C janet-src install'
+      - 'make -C janet-src install-jpm-git'
       - defer: 'rm -rf janet-src janet-src.tar.gz'
     desc: 'Compile and install Janet v1.40.1 at the project level'
     env:
       PREFIX: '{{ .ROOT_DIR }}/.local'
+
+  dependencies:spork:
+    cmds:
+      - './.local/bin/jpm install spork'
+    desc: 'Install the Spork utility library'
 
   start:
     cmds:
