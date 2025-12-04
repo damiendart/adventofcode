@@ -2,16 +2,14 @@
 # free and unencumbered software released into the public domain. For
 # more information, please refer to the accompanying "UNLICENCE" file.
 
-(def input-parser (peg/compile ~{
-  :main (* (some (* (<- (set "@.")) (any :s))))
-}))
+(def input-parser (peg/compile ~(* (some (* (<- (set "@.")) (any :s))))))
 
 (defn solve [input]
   (var diagram (peg/match input-parser input))
   (var removed-rolls 0)
 
-  (var width (string/find "\n" input))
-  (var height (/ (length diagram) width))
+  (def width (string/find "\n" input))
+  (def height (/ (length diagram) width))
 
   (var h nil)
   (while (not= h 0)
@@ -55,9 +53,10 @@
         (if (= (get diagram (+ i width 1)) "@") (++ adjacent-roll-count))
       )
 
-      (if (and (= (get diagram i) "@") (< adjacent-roll-count 4)) (++ h))
-      (if (and (= (get diagram i) "@") (< adjacent-roll-count 4)) (++ removed-rolls))
-      (if (and (= (get diagram i) "@") (< adjacent-roll-count 4)) (set (diagram i) "X"))
+      (if (and (= (get diagram i) "@") (< adjacent-roll-count 4)) (do
+        (++ h)
+        (++ removed-rolls)
+        (set (diagram i) "X")))
 
       (++ i)
     )

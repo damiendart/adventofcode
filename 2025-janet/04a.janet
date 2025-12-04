@@ -2,16 +2,14 @@
 # free and unencumbered software released into the public domain. For
 # more information, please refer to the accompanying "UNLICENCE" file.
 
-(def input-parser (peg/compile ~{
-  :main (* (some (* (<- (set "@.")) (any :s))))
-}))
+(def input-parser (peg/compile ~(* (some (* (<- (set "@.")) (any :s))))))
 
 (defn solve [input]
   (var diagram (peg/match input-parser input))
   (var forkliftable-rolls 0)
 
-  (var width (string/find "\n" input))
-  (var height (/ (length diagram) width))
+  (def width (string/find "\n" input))
+  (def height (/ (length diagram) width))
 
   (var i 0)
   (while (< i (length diagram))
