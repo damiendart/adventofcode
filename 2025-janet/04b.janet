@@ -22,47 +22,36 @@
       (var row-idx (math/floor (/ i height)))
 
       (if (and (not= row-idx 0) (not= column-idx 0))
-        (if (= (get diagram (- i width 1)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (- i width 1)) "@") (++ adjacent-roll-count)))
 
       (if (not= row-idx 0)
-        (if (= (get diagram (- i width)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (- i width)) "@") (++ adjacent-roll-count)))
 
       (if (and (not= row-idx 0) (not= column-idx (- width 1)))
-        (if (= (get diagram (- i width -1)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (- i width -1)) "@") (++ adjacent-roll-count)))
 
       (if (not= column-idx 0)
-        (if (= (get diagram (- i 1)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (- i 1)) "@") (++ adjacent-roll-count)))
 
       (if (not= column-idx (- width 1))
-        (if (= (get diagram (+ i 1)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (+ i 1)) "@") (++ adjacent-roll-count)))
 
       (if (and (not= row-idx (- height 1)) (not= column-idx 0))
-        (if (= (get diagram (+ i width -1)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (+ i width -1)) "@") (++ adjacent-roll-count)))
 
       (if (not= row-idx (- height 1))
-        (if (= (get diagram (+ i width)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (+ i width)) "@") (++ adjacent-roll-count)))
 
       (if (and (not= row-idx (- height 1)) (not= column-idx (- width 1)))
-        (if (= (get diagram (+ i width 1)) "@") (++ adjacent-roll-count))
-      )
+        (if (= (get diagram (+ i width 1)) "@") (++ adjacent-roll-count)))
 
       (if (and (= (get diagram i) "@") (< adjacent-roll-count 4)) (do
-        (++ h)
-        (++ removed-rolls)
-        (set (diagram i) "X")))
+                                                                    (++ h)
+                                                                    (++ removed-rolls)
+                                                                    (set (diagram i) "X")))
 
-      (++ i)
-    )
-  )
+      (++ i)))
 
-  removed-rolls
-)
+  removed-rolls)
 
 (defn main [&] (->> (file/read stdin :all) string/trim solve pp))

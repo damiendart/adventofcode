@@ -50,3 +50,8 @@ tasks:
     cmds:
       - task: 'ci'
     desc: 'Run all development environment setup tasks'
+
+  format:
+    cmds:
+      - './.local/bin/janet-format *.janet'
+    desc: 'Run "janet-format" on all Janet files'
